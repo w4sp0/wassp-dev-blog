@@ -1,9 +1,430 @@
-<!doctype html>
-<html>
-  <head>
-    <title>This is the title of the webpage!</title>
-  </head>
-  <body>
-    <p>Site under development.</p>
-  </body>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>wassp.dev</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:ital,wght@0,400;0,500;0,600;1,400&family=IBM+Plex+Sans:ital,wght@0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --fg: #c4c4b5;
+    --fg-dim: #7c7c6f;
+    --fg-bright: #e8e8d8;
+    --bg: #1a1a17;
+    --bg-alt: #22221e;
+    --accent: #87af87;
+    --accent-dim: #5f875f;
+    --link: #87afd7;
+    --link-hover: #afd7ff;
+    --code-bg: #16160f;
+    --border: #333328;
+    --font-mono: 'IBM Plex Mono', 'Consolas', monospace;
+    --font-body: 'IBM Plex Sans', 'Helvetica Neue', sans-serif;
+    --max-w: 640px;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html {
+    font-size: 16px;
+    -webkit-text-size-adjust: 100%;
+  }
+
+  body {
+    font-family: var(--font-body);
+    color: var(--fg);
+    background: var(--bg);
+    line-height: 1.7;
+    padding: 0 1.25rem;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  /* — Header — */
+  header {
+    max-width: var(--max-w);
+    margin: 3rem auto 0;
+    padding-bottom: 1.5rem;
+    border-bottom: 1px solid var(--border);
+  }
+
+  header h1 {
+    font-family: var(--font-mono);
+    font-size: 1.5rem;
+    font-weight: 600;
+    letter-spacing: -0.02em;
+  }
+
+  header h1 a {
+    color: var(--fg-bright);
+    text-decoration: none;
+  }
+
+  header h1 a:hover {
+    color: var(--accent);
+  }
+
+  header h1 .prompt {
+    color: var(--accent);
+    user-select: none;
+  }
+
+  .tagline {
+    font-family: var(--font-mono);
+    font-size: 0.8rem;
+    color: var(--fg-dim);
+    margin-top: 0.25rem;
+    font-style: italic;
+  }
+
+  .tagline::before {
+    content: '# ';
+    color: var(--accent-dim);
+    font-style: normal;
+  }
+
+  nav {
+    margin-top: 0.75rem;
+    font-family: var(--font-mono);
+    font-size: 0.8rem;
+  }
+
+  nav a {
+    color: var(--fg-dim);
+    text-decoration: none;
+    margin-right: 1.5rem;
+    transition: color 0.15s;
+  }
+
+  nav a:hover {
+    color: var(--link-hover);
+  }
+
+  nav a::before {
+    content: './';
+    color: var(--accent-dim);
+  }
+
+  /* — Main — */
+  main {
+    max-width: var(--max-w);
+    margin: 0 auto;
+  }
+
+  /* — Articles — */
+  article {
+    padding: 2.5rem 0;
+    border-bottom: 1px solid var(--border);
+  }
+
+  article:last-of-type {
+    border-bottom: none;
+  }
+
+  article header {
+    margin: 0;
+    padding: 0;
+    border: none;
+  }
+
+  article h2 {
+    font-family: var(--font-body);
+    font-size: 1.35rem;
+    font-weight: 600;
+    line-height: 1.3;
+    margin-bottom: 0.25rem;
+  }
+
+  article h2 a {
+    color: var(--fg-bright);
+    text-decoration: none;
+    transition: color 0.15s;
+  }
+
+  article h2 a:hover {
+    color: var(--link);
+  }
+
+  .meta {
+    font-family: var(--font-mono);
+    font-size: 0.78rem;
+    color: var(--fg-dim);
+    margin-bottom: 1.25rem;
+  }
+
+  .meta time::before {
+    content: '» ';
+    color: var(--accent-dim);
+  }
+
+  .meta .tag {
+    margin-left: 0.75rem;
+    padding: 0.1rem 0.4rem;
+    background: var(--bg-alt);
+    border: 1px solid var(--border);
+    border-radius: 2px;
+    font-size: 0.72rem;
+  }
+
+  /* — Prose — */
+  article p {
+    margin-bottom: 1rem;
+  }
+
+  article a {
+    color: var(--link);
+    text-decoration: none;
+    border-bottom: 1px solid transparent;
+    transition: border-color 0.15s, color 0.15s;
+  }
+
+  article a:hover {
+    color: var(--link-hover);
+    border-bottom-color: var(--link-hover);
+  }
+
+  article h3 {
+    font-family: var(--font-body);
+    font-size: 1.05rem;
+    font-weight: 600;
+    color: var(--fg-bright);
+    margin: 1.75rem 0 0.75rem;
+  }
+
+  article ul, article ol {
+    margin: 0 0 1rem 1.5rem;
+  }
+
+  article li {
+    margin-bottom: 0.35rem;
+  }
+
+  article strong {
+    color: var(--fg-bright);
+    font-weight: 600;
+  }
+
+  article em {
+    font-style: italic;
+    color: var(--fg);
+  }
+
+  article blockquote {
+    border-left: 3px solid var(--accent-dim);
+    padding: 0.25rem 0 0.25rem 1rem;
+    margin: 1rem 0;
+    color: var(--fg-dim);
+    font-style: italic;
+  }
+
+  /* — Code — */
+  code {
+    font-family: var(--font-mono);
+    font-size: 0.88em;
+    background: var(--code-bg);
+    padding: 0.15em 0.35em;
+    border-radius: 3px;
+    color: var(--accent);
+  }
+
+  pre {
+    background: var(--code-bg);
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    padding: 1rem 1.25rem;
+    margin: 1rem 0 1.25rem;
+    overflow-x: auto;
+    line-height: 1.5;
+  }
+
+  pre code {
+    background: none;
+    padding: 0;
+    font-size: 0.82rem;
+    color: var(--fg);
+  }
+
+  /* — Read more — */
+  .read-more {
+    font-family: var(--font-mono);
+    font-size: 0.82rem;
+    color: var(--fg-dim);
+    text-decoration: none;
+    transition: color 0.15s;
+  }
+
+  .read-more:hover {
+    color: var(--link);
+  }
+
+  .read-more::after {
+    content: ' →';
+  }
+
+  /* — Pagination — */
+  .pagination {
+    max-width: var(--max-w);
+    margin: 2rem auto 3rem;
+    font-family: var(--font-mono);
+    font-size: 0.82rem;
+    display: flex;
+    justify-content: space-between;
+  }
+
+  .pagination a {
+    color: var(--fg-dim);
+    text-decoration: none;
+    transition: color 0.15s;
+  }
+
+  .pagination a:hover {
+    color: var(--link);
+  }
+
+  /* — Footer — */
+  footer {
+    max-width: var(--max-w);
+    margin: 0 auto;
+    padding: 1.5rem 0 3rem;
+    border-top: 1px solid var(--border);
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    color: var(--fg-dim);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  footer a {
+    color: var(--fg-dim);
+    text-decoration: none;
+    transition: color 0.15s;
+  }
+
+  footer a:hover {
+    color: var(--accent);
+  }
+
+  .footer-links a {
+    margin-left: 1.25rem;
+  }
+
+  /* — Responsive — */
+  @media (max-width: 480px) {
+    header { margin-top: 2rem; }
+    header h1 { font-size: 1.25rem; }
+    article h2 { font-size: 1.15rem; }
+    pre { padding: 0.75rem; }
+    pre code { font-size: 0.78rem; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <h1><span class="prompt">~</span> <a href="/">wassp.dev</a></h1>
+  <p class="tagline">yak shaving at industrial scale</p>
+  <nav>
+    <a href="/archive">archive</a>
+    <a href="/about">about</a>
+    <a href="/feed.xml">feed</a>
+  </nav>
+</header>
+
+<main>
+
+<article>
+  <header>
+    <h2><a href="/2026/03/15/qubes-sway-dom0.html">Qubes OS 4.3: Sway in dom0 Without Losing Your Mind</a></h2>
+    <div class="meta">
+      <time datetime="2026-03-15">15 Mar 2026</time>
+      <span class="tag">qubes</span>
+      <span class="tag">sway</span>
+    </div>
+  </header>
+
+  <p>Switching from i3 to Sway in Qubes dom0 sounds straightforward until you realise
+  the Wayland compositor has opinions about how qubes should render their windows.
+  Here's the approach that worked after three false starts.</p>
+
+  <p>The key insight is that <code>qubes-gui-daemon</code> needs to know about
+  your Wayland socket before any domU windows can appear. This means your Sway
+  config needs a few lines that wouldn't make sense anywhere else:</p>
+
+<pre><code># ~/.config/sway/config.d/qubes.conf
+exec --no-startup-id /usr/bin/qubes-gui-daemon
+for_window [app_id="qubes-*"] border pixel 2
+assign [app_id="qubes-work-*"] workspace 3
+assign [app_id="qubes-personal-*"] workspace 4</code></pre>
+
+  <p>The rest is mostly muscle memory if you've been running i3. The
+  keybindings translate one-to-one, <code>swaymsg</code> replaces
+  <code>i3-msg</code>, and your statusbar config just works.</p>
+
+  <a href="/2026/03/15/qubes-sway-dom0.html" class="read-more">keep reading</a>
+</article>
+
+<article>
+  <header>
+    <h2><a href="/2026/02/28/ethercat-rust-soem.html">Wrapping SOEM in Safe Rust: Lessons from the Trenches</a></h2>
+    <div class="meta">
+      <time datetime="2026-02-28">28 Feb 2026</time>
+      <span class="tag">rust</span>
+      <span class="tag">ethercat</span>
+    </div>
+  </header>
+
+  <p>Building an EtherCAT master on top of SOEM in Rust means making peace with
+  <code>unsafe</code>. The C library does raw pointer arithmetic on network buffers,
+  mutates global state, and expects you to poll in a tight loop with sub-millisecond
+  precision. None of this maps neatly to Rust's ownership model.</p>
+
+  <p>After a month of iteration, we landed on a pattern that keeps the unsafe
+  surface area small: a thin FFI layer that owns the SOEM context, a safe
+  <code>EthercatMaster</code> wrapper that enforces the state machine transitions,
+  and a separate real-time thread that never allocates.</p>
+
+  <a href="/2026/02/28/ethercat-rust-soem.html" class="read-more">keep reading</a>
+</article>
+
+<article>
+  <header>
+    <h2><a href="/2026/01/10/nats-leafnode-tls.html">Debugging NATS Leafnode TLS Handshake Failures</a></h2>
+    <div class="meta">
+      <time datetime="2026-01-10">10 Jan 2026</time>
+      <span class="tag">nats</span>
+      <span class="tag">infrastructure</span>
+    </div>
+  </header>
+
+  <p>If you're connecting NATS leaf nodes across network boundaries with TLS
+  and JWT auth, you'll eventually hit a handshake failure that tells you
+  absolutely nothing useful. The error message is <code>tls: bad certificate</code>
+  and it lies — the certificate is fine.</p>
+
+  <p>The actual problem, in our case, was DNS resolution inside the Docker
+  container returning a different IP than the one in the TLS SAN. The fix
+  was embarrassingly simple once diagnosed, but getting there required
+  <code>openssl s_client</code>, packet captures, and a strong cup of coffee.</p>
+
+  <a href="/2026/01/10/nats-leafnode-tls.html" class="read-more">keep reading</a>
+</article>
+
+</main>
+
+<div class="pagination">
+  <span></span>
+  <a href="/page/2">older »</a>
+</div>
+
+<footer>
+  <span>© wassp — oslo</span>
+  <span class="footer-links">
+    <a href="https://github.com/wassp">github</a>
+    <a href="/feed.xml">atom</a>
+  </span>
+</footer>
+
+</body>
 </html>
