@@ -375,18 +375,6 @@ assign [app_id="qubes-personal-*"] workspace 4</code></pre>
     </div>
   </header>
 
-  <p>Building an EtherCAT master on top of SOEM in Rust means making peace with
-  <code>unsafe</code>. The C library does raw pointer arithmetic on network buffers,
-  mutates global state, and expects you to poll in a tight loop with sub-millisecond
-  precision. None of this maps neatly to Rust's ownership model.</p>
-
-  <p>After a month of iteration, we landed on a pattern that keeps the unsafe
-  surface area small: a thin FFI layer that owns the SOEM context, a safe
-  <code>EthercatMaster</code> wrapper that enforces the state machine transitions,
-  and a separate real-time thread that never allocates.</p>
-
-  <a href="/2026/02/28/ethercat-rust-soem.html" class="read-more">keep reading</a>
-</article>
 
 <article>
   <header>
