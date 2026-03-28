@@ -284,23 +284,67 @@ pre code {
 .read-more:hover { color: var(--link); }
 .read-more::after { content: ' →'; }
 
-/* — Pagination — */
-.pagination {
+/* — Post nav (prev/next) — */
+.post-nav {
   max-width: var(--max-w);
   margin: 2rem auto 3rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid var(--border);
   font-family: var(--font-mono);
   font-size: 0.82rem;
   display: flex;
   justify-content: space-between;
+  gap: 2rem;
+  transition: border-color 0.3s;
 }
 
-.pagination a {
+.post-nav a {
   color: var(--fg-dim);
   text-decoration: none;
   transition: color 0.15s;
 }
 
-.pagination a:hover { color: var(--link); }
+.post-nav a:hover { color: var(--link); }
+.post-nav-next { text-align: right; }
+
+/* — Archive — */
+.archive h2 {
+  font-family: var(--font-body);
+  font-size: 1.35rem;
+  font-weight: 600;
+  color: var(--fg-bright);
+  padding-top: 2.5rem;
+  margin-bottom: 1.5rem;
+}
+
+.archive-year {
+  font-family: var(--font-mono);
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--accent);
+  margin: 1.75rem 0 0.5rem;
+}
+
+.archive-entry {
+  font-size: 0.92rem;
+  padding: 0.3rem 0;
+}
+
+.archive-entry time {
+  font-family: var(--font-mono);
+  font-size: 0.78rem;
+  color: var(--fg-dim);
+  display: inline-block;
+  width: 4.5rem;
+}
+
+.archive-entry a {
+  color: var(--fg-bright);
+  text-decoration: none;
+  transition: color 0.15s;
+}
+
+.archive-entry a:hover { color: var(--link); }
 
 /* — Footer — */
 footer {
