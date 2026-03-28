@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-theme="dark">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -7,7 +7,8 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:ital,wght@0,400;0,500;0,600;1,400&family=IBM+Plex+Sans:ital,wght@0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
 <style>
-  :root {
+  /* — Dark theme (default) — */
+  [data-theme="dark"] {
     --fg: #c4c4b5;
     --fg-dim: #7c7c6f;
     --fg-bright: #e8e8d8;
@@ -19,6 +20,24 @@
     --link-hover: #afd7ff;
     --code-bg: #16160f;
     --border: #333328;
+  }
+
+  /* — Light theme — */
+  [data-theme="light"] {
+    --fg: #3a3a32;
+    --fg-dim: #8a8a7d;
+    --fg-bright: #1a1a14;
+    --bg: #f5f4ef;
+    --bg-alt: #eae9e2;
+    --accent: #4a7a4a;
+    --accent-dim: #6a9a6a;
+    --link: #2e6699;
+    --link-hover: #1a4d73;
+    --code-bg: #e8e7e0;
+    --border: #d0cfc6;
+  }
+
+  :root {
     --font-mono: 'IBM Plex Mono', 'Consolas', monospace;
     --font-body: 'IBM Plex Sans', 'Helvetica Neue', sans-serif;
     --max-w: 640px;
@@ -39,33 +58,36 @@
     padding: 0 1.25rem;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
+    transition: background 0.3s ease, color 0.3s ease;
   }
 
   /* — Header — */
-  header {
+  header.site-header {
     max-width: var(--max-w);
     margin: 3rem auto 0;
     padding-bottom: 1.5rem;
     border-bottom: 1px solid var(--border);
+    transition: border-color 0.3s;
   }
 
-  header h1 {
+  header.site-header h1 {
     font-family: var(--font-mono);
     font-size: 1.5rem;
     font-weight: 600;
     letter-spacing: -0.02em;
   }
 
-  header h1 a {
+  header.site-header h1 a {
     color: var(--fg-bright);
     text-decoration: none;
+    transition: color 0.15s;
   }
 
-  header h1 a:hover {
+  header.site-header h1 a:hover {
     color: var(--accent);
   }
 
-  header h1 .prompt {
+  header.site-header h1 .prompt {
     color: var(--accent);
     user-select: none;
   }
@@ -84,8 +106,14 @@
     font-style: normal;
   }
 
-  nav {
+  .header-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
     margin-top: 0.75rem;
+  }
+
+  nav {
     font-family: var(--font-mono);
     font-size: 0.8rem;
   }
@@ -106,6 +134,35 @@
     color: var(--accent-dim);
   }
 
+  /* — Theme toggle — */
+  .theme-toggle {
+    background: none;
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    color: var(--fg-dim);
+    font-family: var(--font-mono);
+    font-size: 0.78rem;
+    padding: 0.25rem 0.6rem;
+    cursor: pointer;
+    transition: color 0.15s, border-color 0.15s, background 0.15s;
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+    flex-shrink: 0;
+    line-height: 1;
+  }
+
+  .theme-toggle:hover {
+    color: var(--accent);
+    border-color: var(--accent-dim);
+    background: var(--bg-alt);
+  }
+
+  .theme-toggle .icon {
+    font-size: 0.9rem;
+    line-height: 1;
+  }
+
   /* — Main — */
   main {
     max-width: var(--max-w);
@@ -116,6 +173,7 @@
   article {
     padding: 2.5rem 0;
     border-bottom: 1px solid var(--border);
+    transition: border-color 0.3s;
   }
 
   article:last-of-type {
@@ -126,6 +184,7 @@
     margin: 0;
     padding: 0;
     border: none;
+    max-width: unset;
   }
 
   article h2 {
@@ -165,6 +224,7 @@
     border: 1px solid var(--border);
     border-radius: 2px;
     font-size: 0.72rem;
+    transition: background 0.3s, border-color 0.3s;
   }
 
   /* — Prose — */
@@ -207,7 +267,6 @@
 
   article em {
     font-style: italic;
-    color: var(--fg);
   }
 
   article blockquote {
@@ -226,6 +285,7 @@
     padding: 0.15em 0.35em;
     border-radius: 3px;
     color: var(--accent);
+    transition: background 0.3s, color 0.3s;
   }
 
   pre {
@@ -236,6 +296,7 @@
     margin: 1rem 0 1.25rem;
     overflow-x: auto;
     line-height: 1.5;
+    transition: background 0.3s, border-color 0.3s;
   }
 
   pre code {
@@ -294,6 +355,7 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
+    transition: border-color 0.3s;
   }
 
   footer a {
@@ -312,24 +374,41 @@
 
   /* — Responsive — */
   @media (max-width: 480px) {
-    header { margin-top: 2rem; }
-    header h1 { font-size: 1.25rem; }
+    header.site-header { margin-top: 2rem; }
+    header.site-header h1 { font-size: 1.25rem; }
     article h2 { font-size: 1.15rem; }
     pre { padding: 0.75rem; }
     pre code { font-size: 0.78rem; }
+    .header-row { flex-wrap: wrap; gap: 0.5rem; }
   }
 </style>
+<!-- Prevent flash of wrong theme -->
+<script>
+(function() {
+  var s = localStorage.getItem('wassp-theme');
+  if (s) { document.documentElement.setAttribute('data-theme', s); }
+  else if (window.matchMedia('(prefers-color-scheme: light)').matches) {
+    document.documentElement.setAttribute('data-theme', 'light');
+  }
+})();
+</script>
 </head>
 <body>
 
-<header>
+<header class="site-header">
   <h1><span class="prompt">~</span> <a href="/">wassp.dev</a></h1>
   <p class="tagline">yak shaving at industrial scale</p>
-  <nav>
-    <a href="/archive">archive</a>
-    <a href="/about">about</a>
-    <a href="/feed.xml">feed</a>
-  </nav>
+  <div class="header-row">
+    <nav>
+      <a href="/archive">archive</a>
+      <a href="/about">about</a>
+      <a href="/feed.xml">feed</a>
+    </nav>
+    <button class="theme-toggle" aria-label="Toggle theme">
+      <span class="icon"></span>
+      <span class="label"></span>
+    </button>
+  </div>
 </header>
 
 <main>
@@ -375,6 +454,18 @@ assign [app_id="qubes-personal-*"] workspace 4</code></pre>
     </div>
   </header>
 
+  <p>Building an EtherCAT master on top of SOEM in Rust means making peace with
+  <code>unsafe</code>. The C library does raw pointer arithmetic on network buffers,
+  mutates global state, and expects you to poll in a tight loop with sub-millisecond
+  precision. None of this maps neatly to Rust's ownership model.</p>
+
+  <p>After a month of iteration, we landed on a pattern that keeps the unsafe
+  surface area small: a thin FFI layer that owns the SOEM context, a safe
+  <code>EthercatMaster</code> wrapper that enforces the state machine transitions,
+  and a separate real-time thread that never allocates.</p>
+
+  <a href="/2026/02/28/ethercat-rust-soem.html" class="read-more">keep reading</a>
+</article>
 
 <article>
   <header>
@@ -413,6 +504,38 @@ assign [app_id="qubes-personal-*"] workspace 4</code></pre>
     <a href="/feed.xml">atom</a>
   </span>
 </footer>
+
+<script>
+(function() {
+  var html = document.documentElement;
+  var btn = document.querySelector('.theme-toggle');
+  var icon = btn.querySelector('.icon');
+  var label = btn.querySelector('.label');
+
+  function update() {
+    var dark = html.getAttribute('data-theme') === 'dark';
+    icon.textContent = dark ? '☽' : '☀';
+    label.textContent = dark ? 'light' : 'dark';
+  }
+
+  btn.addEventListener('click', function() {
+    var next = html.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+    html.setAttribute('data-theme', next);
+    localStorage.setItem('wassp-theme', next);
+    update();
+  });
+
+  // Respect OS-level changes when no manual preference saved
+  window.matchMedia('(prefers-color-scheme: light)').addEventListener('change', function(e) {
+    if (!localStorage.getItem('wassp-theme')) {
+      html.setAttribute('data-theme', e.matches ? 'light' : 'dark');
+      update();
+    }
+  });
+
+  update();
+})();
+</script>
 
 </body>
 </html>
