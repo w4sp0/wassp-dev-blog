@@ -1,0 +1,29 @@
+baseURL = "https://wassp.dev/"
+languageCode = "en-us"
+title = "wassp.dev"
+
+disableKinds = ["taxonomy", "term"]
+
+[params]
+  author = "Wassp"
+  description = "Systems programming, Rust, industrial protocols, and optimization"
+
+[markup.highlight]
+  style = "monokai"
+  lineNos = true
+
+[markup.goldmark.renderer]
+  unsafe = true
+
+[menu]
+  [[menu.main]]
+    name = "Posts"
+    url = "/posts/"
+    weight = 1
+  [[menu.main]]
+    name = "About"
+    url = "/about/"
+    weight = 2
+
+[permalinks]
+  posts = "/posts/:slug/"
