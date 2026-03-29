@@ -1,10 +1,12 @@
 {{ define "main" }}
-{{ .Title }}
+<h2>{{ .Title }}</h2>
 {{ range .Pages }}
-{{ .Title }}
-{{ .Date.Format "2006-01-02" }}
-{{ with .Summary }}
-{{ . }}
-
+<article class="post-item">
+  <h3><a href="{{ .Permalink }}">{{ .Title }}</a></h3>
+  <div class="meta">
+    <span class="sep">»</span> <time datetime="{{ .Date.Format "2006-01-02" }}">{{ .Date.Format "2006-01-02" }}</time>
+  </div>
+  {{ with .Summary }}<p>{{ . }}</p>{{ end }}
+</article>
 {{ end }}
-{{ end }} {{ end }}
+{{ end }}

@@ -1,12 +1,13 @@
 baseURL = "https://wassp.dev/"
 languageCode = "en-us"
-title = "wassp.dev"
+title = "/dev/wassp"
 
 disableKinds = ["taxonomy", "term"]
 
 [params]
-  author = "Wassp"
+  author = "wassp"
   description = "Systems programming, Rust, industrial protocols, and optimization"
+  tagline = "blogs here, when he blogs."
 
 [markup.highlight]
   style = "monokai"
@@ -17,11 +18,11 @@ disableKinds = ["taxonomy", "term"]
 
 [menu]
   [[menu.main]]
-    name = "Posts"
+    name = "archive"
     url = "/posts/"
     weight = 1
   [[menu.main]]
-    name = "About"
+    name = "about"
     url = "/about/"
     weight = 2
 

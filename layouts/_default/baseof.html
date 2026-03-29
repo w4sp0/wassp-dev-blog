@@ -5,25 +5,56 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>{{ if .IsHome }}{{ .Site.Title }}{{ else }}{{ .Title }} | {{ .Site.Title }}{{ end }}</title>
   <meta name="description" content="{{ with .Description }}{{ . }}{{ else }}{{ .Site.Params.description }}{{ end }}">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:ital,wght@0,400;0,500;0,600;1,400&family=IBM+Plex+Sans:ital,wght@0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="/css/style.css">
   <link rel="alternate" type="application/rss+xml" title="{{ .Site.Title }}" href="/index.xml">
 </head>
 <body>
+  <button class="theme-toggle" onclick="toggleTheme()">light</button>
   <header>
-    <nav>
-      <a href="/" class="site-title">{{ .Site.Title }}</a>
-      <div class="nav-links">
+    <div class="inner">
+      <h1><a href="/"><span class="slash">/</span>dev<span class="slash">/</span>wassp</a></h1>
+      <p class="tagline"><a href="/about">wassp</a> {{ .Site.Params.tagline }}</p>
+      <nav>
         {{ range .Site.Menus.main }}
           <a href="{{ .URL }}">{{ .Name }}</a>
         {{ end }}
-      </div>
-    </nav>
+      </nav>
+    </div>
   </header>
   <main>
     {{ block "main" . }}{{ end }}
   </main>
   <footer>
-    <p>&copy; {{ now.Year }} {{ .Site.Params.author }}</p>
+    <a href="https://github.com/w4sp0">github.com/w4sp0</a>
   </footer>
+  <script>
+    (function() {
+      var t = localStorage.getItem('theme');
+      if (t === 'light') {
+        document.documentElement.setAttribute('data-theme', 'light');
+      }
+    })();
+    function toggleTheme() {
+      var html = document.documentElement;
+      var btn = document.querySelector('.theme-toggle');
+      if (html.getAttribute('data-theme') === 'light') {
+        html.removeAttribute('data-theme');
+        localStorage.setItem('theme', 'dark');
+        btn.textContent = 'light';
+      } else {
+        html.setAttribute('data-theme', 'light');
+        localStorage.setItem('theme', 'light');
+        btn.textContent = 'dark';
+      }
+    }
+    (function() {
+      var btn = document.querySelector('.theme-toggle');
+      if (document.documentElement.getAttribute('data-theme') === 'light') {
+        btn.textContent = 'dark';
+      }
+    })();
+  </script>
 </body>
 </html>
